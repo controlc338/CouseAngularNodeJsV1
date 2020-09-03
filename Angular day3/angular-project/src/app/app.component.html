@@ -1,0 +1,35 @@
+<div class="form-group">
+  <label> ส่งข้อมูลไปหา Component ลูก </label>
+  <input class="form-control" type="file" (change)="image($event)">
+</div>
+
+<h1>
+  ข้อความที่ส่งมาจาก Child {{messageFromChild}}
+</h1>
+
+<qrcode [qrdata]="'Your data string'" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+
+            <ngx-barcode 
+            [bc-value]="barcode" 
+            [bc-format]="format"
+             [bc-line-color]="lineColor" 
+             [bc-width]="width"
+              [bc-height]="height"
+               [bc-display-value]="displayValue" 
+               [bc-font-options]="fontOptions" 
+               [bc-font]="font"
+              [bc-text-align]="textAlign" 
+              [bc-text-position]="textPosition" 
+              [bc-text-margin]="textMargin"
+              [bc-font-size]="15" 
+              [bc-background]="background" 
+              [bc-margin]="margin" 
+              [bc-margin-top]="marginTop"
+              [bc-margin-bottom]="marginBottom"
+               [bc-margin-left]="marginLeft" 
+               [bc-margin-right]="marginRight">
+            </ngx-barcode>
+
+<!-- 
+<app-home (messageEvent)="messageFromChlid($event)"></app-home>  childToParent
+<app-home [messageFromparent]="message"></app-home>  parentToChild -->
