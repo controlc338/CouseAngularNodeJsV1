@@ -14,7 +14,7 @@ const db = new pg.Pool({
   max: 20,
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 2000,
-  port:5432
+  port:5434
 
 })
 
@@ -25,7 +25,7 @@ const PORT = process.env.PORT || 60
 
 app.use(cors())
 app.use(bodyParser.json())
-var conString = "postgres://postgres:Controlc338@localhost/db_example";
+var conString = "postgres://postgres:1234@localhost:5434/db_example";
 
 app.get('/', (req, res) => {
 
@@ -66,6 +66,7 @@ app.get('/person2', (req, res) => {
       })
     } else {
       res.json(result.rows)
+      
     }
   })
 })
@@ -111,7 +112,7 @@ app.put('/person/:id', async (req, res) => {
 
 app.post('/person/auto', (req, res) => {
   let query = {
-    text: "INSERT INTO person(name) VALUES($1) RETURNING id",
+    text: "INSERT INTO person(name) VALUES($1) RETURNING id,name",
     values: [req.body.name]
   }
   db.query(query, (err, result) => {
@@ -122,7 +123,7 @@ app.post('/person/auto', (req, res) => {
     } else {
       res.json({
         status: 'success',
-        id: result.rows[0].id
+        id: result.rows
       })
     }
   })
@@ -216,8 +217,6 @@ app.delete('/se/customer/:id', async (req, res) => {
     res.json(err.message)
   })
   
-
-
 })
 
 

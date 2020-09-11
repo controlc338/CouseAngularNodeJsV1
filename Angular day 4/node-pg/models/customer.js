@@ -18,8 +18,13 @@ const Customer = configSeq.define('customer', {
   tex: {
       type: DataTypes.STRING,
       allowNull: true,
-  }
+  },
+  text2: {
+    type: DataTypes.STRING,
+    allowNull: true,
+}
 })
+
 //Customer.sync({alter: true})
 
 module.exports = Customer

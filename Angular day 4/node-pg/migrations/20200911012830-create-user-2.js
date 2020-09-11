@@ -1,5 +1,7 @@
 'use strict';
 
+
+
 // queryInterface.addColumn('Person', 'petName', {
 //   type: DataTypes.STRING
 // });
@@ -13,9 +15,10 @@
 // queryInterface.removeColumn('Person', 'petName', {
 //   /* query options */ });
 
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Users', {
+    await queryInterface.createTable('User2s', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -42,6 +45,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Users');
+    await queryInterface.dropTable('User2s');
   }
 };

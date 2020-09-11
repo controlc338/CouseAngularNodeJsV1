@@ -9,6 +9,8 @@ import { MenuComponent } from './layout/menu/menu.component';
 import { HomeComponent } from './layout/home/home.component';
 import { OneComponent } from './home/one/one.component';
 import { TwoComponent } from './home/two/two.component';
+import { FourModule } from './home/four/four.module';
+
 
 const routes: Routes = [
   {path:'', component:OneComponent},
@@ -26,7 +28,8 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    FourModule
   ],
   providers: [],
   bootstrap: [AppComponent]
