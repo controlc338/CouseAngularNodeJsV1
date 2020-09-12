@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+  </script>
+  <style>
+    @page {
+      margin: 0;
+      width: 210mm;
+      height: 297mm;
+    }
+
+    .bill-size {
+      width: 210mm;
+      height: 297mm;
+      background-color: gray;
+    }
+
+    @media print {
+      @page {
+      width: 210mm;
+      height: 297mm;
+      }
+
+      .pagebreak {
+        clear: both;
+        page-break-after: always;
+      }
+
+      html,
+      body {
+      width: 210mm;
+      height: 297mm;
+        margin: 0;
+      }
+
+      hr.line {
+        border-top: 1px dotted black;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="bill-size">
+    <div class="text-center">
+      ใบเสร็จรับเงิน
+    </div>
+    <div class="text-center">
+      Control C
+    </div>
+    <div class="text-left">
+      สาขา: Ubon
+    </div>
+    <div class="text-left">
+      ที่อยู่: Mo Ubon
+    </div>
+    <div class="text-left">
+      โทร: 0123456789
+    </div>
+    <div class="text-left">
+      ผู้ขาย: Sale
+    </div>
+    <hr class="line">
+    <table width="100%" border="1px">
+      <thead>
+        <tr>
+          <th class="text-left" width="40%"> รายการ </th>
+          <th class="text-right" width="20%"> Qty </th>
+          <th class="text-right" width="20%"> ราคา </th>
+          <th class="text-right" width="20%"> รวม </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="text-left">Mama</td>
+          <td class="text-right">5</td>
+          <td class="text-right">20</td>
+          <td class="text-right">100</td>
+        </tr>
+      </tbody>
+    </table>
+    <hr class="line">
+    <table width="100%" border="1px">
+      <tbody>
+        <tr>
+          <td class="text-left">
+            รวม:
+          </td>
+          <td class="text-right">
+            100
+          </td>
+        </tr>
+        <tr>
+          <td class="text-left">
+            ส่วนลด:
+          </td>
+          <td class="text-right">
+            0
+          </td>
+        </tr>
+        <tr>
+          <td class="text-left">
+            รวม:
+          </td>
+          <td class="text-right">
+            100
+          </td>
+        </tr>
+        <tr>
+          <td class="text-left">
+            รับเงิน:
+          </td>
+          <td class="text-right">
+            100
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+
+</html>
