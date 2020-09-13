@@ -1,0 +1,8 @@
+<app-header *ngIf="isLogin | async as isLogin"></app-header>
+<app-menu *ngIf="isLogin | async as isLogin"></app-menu>
+
+<div class="content-wrapper" style="min-height: 493px;">
+    <router-outlet></router-outlet>
+</div>
+
+<app-footer *ngIf="isLogin "></app-footer>

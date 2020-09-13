@@ -1,0 +1,41 @@
+<div class="hold-transition login-page">
+  <div class="login-box">
+    <div class="login-logo">
+      <a><b>Dialy</b>Note</a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="card">
+      <div class="card-body login-card-body">
+        <p class="login-box-msg">Sign in to start your session</p>
+        <div>
+          <div class="input-group mb-3">
+            <input type="email" class="form-control" placeholder="Email" [(ngModel)]="loigForm.username">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-envelope"></span>
+              </div>
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <input type="password" class="form-control" placeholder="Password" [(ngModel)]="loigForm.password">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <!-- /.col -->
+            <div class="col-4">
+              <button (click)="onSubmit()" class="btn btn-primary btn-block">Sign In</button>
+            </div>
+            <!-- /.col -->
+          </div>
+        </div>
+
+        <!-- /.social-auth-links -->
+      </div>
+      <!-- /.login-card-body -->
+    </div>
+  </div>
+</div>

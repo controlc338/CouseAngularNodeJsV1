@@ -1,0 +1,52 @@
+CREATE TABLE public.tb_note
+(
+    id integer NOT NULL,
+    note text COLLATE pg_catalog."default",
+    tag_id integer DEFAULT 0,
+    created_date timestamp without time zone,
+    user_id integer NOT NULL,
+    CONSTRAINT tb_note_pkey PRIMARY KEY (id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.tb_note
+    OWNER to postgres;
+
+
+
+-- Table: public.tb_tag
+
+-- DROP TABLE public.tb_tag;
+
+CREATE TABLE public.tb_tag
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    name character varying(100) COLLATE pg_catalog."default" NOT NULL,
+    user_id integer NOT NULL,
+    CONSTRAINT tb_tag_pkey PRIMARY KEY (id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.tb_tag
+    OWNER to postgres;
+
+    -- Table: public.tb_user
+
+-- DROP TABLE public.tb_user;
+
+CREATE TABLE public.tb_user
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    name character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    last_name character varying(255) COLLATE pg_catalog."default",
+    username character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    password character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT tb_user_pkey PRIMARY KEY (id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.tb_user
+    OWNER to postgres;
