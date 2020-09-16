@@ -1,1 +1,7 @@
-<p>modal-note works!</p>
+<div class="form-group">
+  <label for="exampleInputEmail1">Note</label>
+  <input type="text" class="form-control" id="exampleInputEmail1" [(ngModel)]="note">
+</div>
+<div class="text-center">
+    <button class="btn btn-primary" (click)="onSave()"> Save </button>
+</div>

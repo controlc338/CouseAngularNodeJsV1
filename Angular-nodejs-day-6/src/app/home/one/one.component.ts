@@ -1,6 +1,9 @@
 import { error } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalNoteComponent } from './modal-note/modal-note.component';
+import { ModalTagComponent } from './modal-tag/modal-tag.component';
 
 @Component({
   selector: 'app-one',
@@ -9,85 +12,114 @@ import { AuthService } from 'src/app/auth.service';
 })
 export class OneComponent implements OnInit {
 
-  constructor(private service:AuthService) { }
+  constructor(private service: AuthService, private dialog: MatDialog)
+  {
 
-  noteName:string
-  notes = []
-  note_id = 0
-  keyword:string
+  }
+
+  noteName: string;
+  notes = [];
+  noteId = 0;
+  keyword: string;
+
+
 
   ngOnInit(): void {
-    
-    this.getNote()
+
+    this.getNote();
   }
 
-  addNote() {
-    
+  addNote(): void {
+      const dialog = this.dialog.open(ModalNoteComponent, {
+        width: '800px',
+        data: {}
+      });
+      dialog.afterClosed().subscribe(resp => {
+        if (resp === 'success'){
+            this.getNote();
+        }
+      });
+
   }
 
-  addTag() {
-    
+  addTag(): void {
+    const dialog = this.dialog.open(ModalTagComponent, {
+      width: '800px',
+      data: {}
+    });
   }
 
-  findByKeyword() {
+  findByKeyword(): void {
     this.service.findBykeyworld(this.keyword)
       .then(resp => {
-        this.notes = resp
-      }, error => { 
-          console.log(error)
-      })
+        this.notes = resp;
+      }, error => {
+          console.log(error);
+      });
   }
 
-  saveNote() {
-    let body = {
-      tag_id:1,
-      note:this.noteName
-    }
-    if (this.note_id != 0) {
-      this.service.updateNote(body, this.note_id)
-        .then(resp => { 
+  saveNote(): void {
+    const body = {
+      tag_id: 1,
+      note: this.noteName
+    };
+    if (this.noteId != 0) {
+      this.service.updateNote(body, this.noteId)
+        .then(resp => {
           if (resp.message == 'success') {
-              this.getNote()
+              this.getNote();
           }
-        })
-      
+        });
+
     } else {
       this.service.saveNote(body)
         .then(resp => {
           if (resp.message == 'success') {
-            this.getNote()
+            this.getNote();
           }
         }, err => {
-      })
+      });
     }
-    
+
   }
 
-  getNote() {
+  getNote(): void {
     this.service.getNote()
       .then(resp => {
-      this.notes = resp
+      this.notes = resp;
       }, error => {
-          console.log(error)
-    })
+          console.log(error);
+    });
   }
 
-  edit(item) {
-    this.noteName = item.note
-    this.note_id = item.id
+  edit(item): void {
+    const data = {
+        id: item.id,
+        note: item.note,
+        action: 'edit'
+    };
+    const dialog = this.dialog.open(ModalNoteComponent, {
+      width: '800px',
+      data
+    });
+    dialog.afterClosed().subscribe(resp => {
+      if (resp === 'success'){
+          this.getNote();
+      }
+    });
   }
 
-  
 
-  delete(id) {
+
+  delete(id): void {
     this.service.deleteNote(id)
       .then(resp => {
         if (resp.message == 'success') {
-          this.getNote()
+          this.getNote();
         }
       }, error => {
-          console.log(error)
-    })
+          console.log(error);
+    });
   }
 
 }
