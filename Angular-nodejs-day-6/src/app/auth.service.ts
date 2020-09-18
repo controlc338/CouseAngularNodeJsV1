@@ -27,6 +27,13 @@ export class AuthService {
     this.logined.next(true);
   }
 
+  checkLogin(){
+    if(localStorage.getItem('token') != null){
+      this.logined.next(true);
+      this.router.navigate(['/note/note']);
+    }
+  }
+
   constructor(private http: HttpClient, private router: Router) {
 
   }
@@ -118,6 +125,13 @@ export class AuthService {
       this.http.delete(`${this.geturl}/tag/${id}`, this.getHeadersAut())
       .subscribe(resp => resolve(resp), error => reject(error));
     });
+  }
+
+  getTag(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.get(`${this.geturl}/tag`, this.getHeadersAut())
+      .subscribe(resp => resolve(resp), error => reject(error));
+    })
   }
 
 }

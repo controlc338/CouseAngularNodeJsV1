@@ -11,6 +11,9 @@ export class ModalNoteComponent implements OnInit {
 
   note: string;
   private action: string;
+  tag_id:string;
+  tags = []
+
   constructor(public dialogRef: MatDialogRef<ModalNoteComponent>,
               @Inject(MAT_DIALOG_DATA) private data: any, private service: AuthService)
               {
@@ -20,11 +23,12 @@ export class ModalNoteComponent implements OnInit {
 
     ngOnInit(): void
     {
-
+      this.getTag()
     }
    onSave(): void{
     const body = {
-      note: this.note
+      note: this.note,
+      tag_id:this.tag_id
     };
     if (this.action !== 'edit'){
       this.service.saveNote(body)
@@ -42,6 +46,15 @@ export class ModalNoteComponent implements OnInit {
       });
     }
 
+    
+
+  }
+  getTag(){
+    this.service.getTag()
+    .then(resp =>{
+      this.tags = resp
+      this.tag_id = resp[0].id
+    })
   }
 
 }

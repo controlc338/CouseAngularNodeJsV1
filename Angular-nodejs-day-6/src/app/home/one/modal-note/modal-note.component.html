@@ -2,6 +2,14 @@
   <label for="exampleInputEmail1">Note</label>
   <input type="text" class="form-control" id="exampleInputEmail1" [(ngModel)]="note">
 </div>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <label class="input-group-text" for="inputGroupSelect01">Tag</label>
+  </div>
+  <select class="custom-select" id="inputGroupSelect01" [(ngModel)]="tag_id">
+    <option *ngFor="let item of tags" value="{{item.id}}">{{item.name}}</option>
+  </select>
+</div>
 <div class="text-center">
     <button class="btn btn-primary" (click)="onSave()"> Save </button>
 </div>
