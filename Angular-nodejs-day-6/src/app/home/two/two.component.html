@@ -1,1 +1,56 @@
-<p>two works!</p>
+<div class="row">
+    <h4>
+        https://valor-software.com/ng2-charts/#/GeneralInfo // ดูกราฟเพิ่มเติมได้ที่
+    </h4>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="chartjs-container">
+            <canvas baseChart 
+                [datasets]="lineChartData" 
+                [labels]="lineChartLabels" 
+                [options]="lineChartOptions"
+                [colors]="lineChartColors" 
+                [legend]="lineChartLegend" 
+                [chartType]="lineChartType" 
+                [plugins]="lineChartPlugins"
+                (chartHover)="chartHovered($event)" 
+                (chartClick)="chartClicked($event)">
+            </canvas>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="chartjs-container">
+            <canvas 
+                baseChart 
+                [data]="pieChartData" 
+                [labels]="pieChartLabels" 
+                [chartType]="pieChartType"
+                [options]="pieChartOptions" 
+                [plugins]="pieChartPlugins" 
+                [colors]="pieChartColors" 
+                [legend]="pieChartLegend">
+            </canvas>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="chartjs-container">
+            <canvas baseChart 
+                [datasets]="barChartData" 
+                [labels]="barChartLabels" 
+                [options]="barChartOptions"
+                [plugins]="barChartPlugins" 
+                [legend]="barChartLegend" 
+                [chartType]="barChartType">
+            </canvas>
+        </div>
+    </div>
+    <div class="col-lg-6">
+    </div>
+</div>
+

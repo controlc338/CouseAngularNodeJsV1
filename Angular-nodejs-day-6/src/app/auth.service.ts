@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { throwError } from 'rxjs/internal/observable/throwError';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +26,7 @@ export class AuthService {
 
    // tslint:disable-next-line: typedef
    setIsLogin(value) {
-    this.logined.next(true);
+    this.logined.next(value);
   }
 
   checkLogin(){
@@ -134,4 +136,35 @@ export class AuthService {
     })
   }
 
+  upload(data): Promise<any> {
+    return new Promise((resolve, reject) => {
+        this.http.post(`${this.geturl}/upload`,data)
+        .subscribe(resp => resolve(resp), error => reject(error))
+    })
+  }
+
+}
+
+
+@Injectable()
+export class AuthIntercept  implements HttpInterceptor {
+    
+    constructor(private router: Router, private service: AuthService){
+
+    }
+
+    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        return next.handle(req).pipe(
+            catchError((err: HttpErrorResponse) => {
+                if (err.status == 401 || err.status == 403) {
+                    this.service.setIsLogin(false)
+                    localStorage.removeItem('token')
+                    this.router.navigateByUrl(`/note`)
+                    return throwError(err.message)
+                } else {
+                  return throwError(err)
+                }
+              })
+        )
+    }
 }

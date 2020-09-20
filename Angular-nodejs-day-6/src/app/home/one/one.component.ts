@@ -122,4 +122,46 @@ export class OneComponent implements OnInit {
     });
   }
 
+  selectFile(event) {
+    let file = event.target.files[0]
+    let image = new FormData();
+    image.append("image", file);
+    this.service.upload(image)
+    .then(resp =>{
+        console.log(resp)
+    }, error =>{
+      console.log(error);
+    })
+  }
+
+  
+// upload() {
+//     let file = new FormData()
+
+//     file.append("product", this.file);
+//     if(this.data.action==="edit"){
+//         this._connect.upload_file({name:this.product_model.img},"/delete_img").subscribe((res)=>{
+//         })
+//         this._connect.upload_file(file,"/upload_img_product").subscribe((res)=>{
+//             if(res.status=="success"){
+//                 this.show_snackbar_accent('NAV.ERROR.UPLOAD_SUCCESS')
+//                 this.form_product.patchValue({
+//                     img:res.name
+//                 })
+//                 this.status = true;
+//             }
+//         })
+//     }else{
+//         this._connect.upload_file(file,"/upload_img_product").subscribe((res)=>{
+//             if(res.status=="success"){
+//                 this.show_snackbar_accent('NAV.ERROR.UPLOAD_SUCCESS')
+//                 this.form_product.patchValue({
+//                     img:res.name
+//                 })
+//                 this.status = true;
+//             }
+//         })
+//     }
+// }
+
 }
