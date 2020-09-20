@@ -5,7 +5,7 @@ const secretKey = "MIICIjANBgkqhkiG9w0BAQaQQE"
 
 exports.login = async (req, res, next) => {
   try {
-      
+     
     let query = {
       text: "SELECT * FROM tb_user WHERE username = $1 AND password =$2",
       values:[req.body.username, req.body.password]
@@ -19,7 +19,7 @@ exports.login = async (req, res, next) => {
         lastname: user[0].last_name,
         user_id: user[0].id
       }
-      let token = jwt.sign(payload, secretKey, { algorithm: "HS256", expiresIn: '1d' })
+      let token = jwt.sign(payload, secretKey, { algorithm: "HS256", expiresIn: '1m' })
       res.json({
         message: 'success',
         token: token

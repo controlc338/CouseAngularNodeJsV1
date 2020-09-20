@@ -8,6 +8,9 @@ const cors = require('cors')
 const login = require('./module_route/login')
 const note = require('./route/note')
 const tag = require('./route/tag')
+const multer = require("multer");
+const path = require("path");
+
 
 const PORT = process.env.PORT || 60
 
@@ -23,7 +26,23 @@ app.use(session({
   saveUninitialized: true,
 }))
 
+
+app.use(express.static(path.join(__dirname, "/public")));
+
 const secretKey = "MIICIjANBgkqhkiG9w0BAQaQQE"
+
+
+const storage = multer.diskStorage({
+  destination: (req, file, callBack) => {
+      callBack(null, "public/image/");
+  },
+  filename: (req, file, callBack) => {
+      const uniqueSuffix = Date.now() + "_" + Math.round(Math.random() * 1e9);
+      callBack(null, uniqueSuffix + "_" + file.originalname);
+  },
+});
+
+const upload = multer({ storage: storage });
 
 verifyToken = (req, res, next) => {
   let token = req.headers['authorization']
@@ -53,6 +72,21 @@ app.use('/note', verifyToken, note)
 app.use('/tag', verifyToken, tag)
 
 
+
+
+app.post("/upload", upload.single("image"), (req, res, next) => {
+  const file = req.file;
+  if (!file) {
+      const error = new Error("No File");
+      error.httpStatusCode = 400;
+      return next(error);
+  }
+  res.send({ name: file.filename, status: "success" });
+
+});
+
+
+
 app.use(function (req, res, next) {
   next(createError(404));
 });
@@ -72,3 +106,5 @@ app.use(function (err, req, res, next) {
 app.listen(PORT, () => {
   console.log(`Connection port ${PORT}`)
 })
+
+

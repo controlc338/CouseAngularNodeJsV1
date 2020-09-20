@@ -4,9 +4,10 @@ var moment = require('moment')
 const pool = new Pool({
   host: 'localhost',
   user: 'postgres',
-  password: '045433455',
+  password: '1234',
   database: 'db_note',
   max: 50,
+  port:5434,
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis:2000
 })

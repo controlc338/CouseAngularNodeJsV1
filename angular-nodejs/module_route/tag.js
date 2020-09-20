@@ -21,7 +21,7 @@ exports.findAll = (req, res) => {
 exports.created = (req, res) => {
   let query = {
     text: "INSERT INTO tb_tag(name,user_id) VALUES($1, $2)",
-    values: [req.body.name, req.payload.user_id]
+    values: [req.body.tag, req.payload.user_id]
   }
 
   db.query(query, (err, result) => {
